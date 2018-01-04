@@ -80,7 +80,7 @@ def random_jitter(desired_mean,num_trials,iti_min=1,iti_max=np.inf,discrete=True
 
     if plot:
         if discrete:
-            pd.Series(seq).plot(kind='hist',bins=len(np.unique(s)),xticks=np.arange(iti_min,seq.max()))
+            pd.Series(seq).plot(kind='hist',bins=len(np.unique(seq)),xticks=np.arange(iti_min,seq.max()))
         else:
             pd.Series(seq).plot(kind='hist',bins=10,xlim = (iti_min,seq.max()))
     return seq

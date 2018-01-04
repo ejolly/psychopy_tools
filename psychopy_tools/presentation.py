@@ -3,34 +3,49 @@
 """Main module."""
 
 from __future__ import division
+from psychopy import core
 
-def clean_up(scanner, biopac):
+def clean_up(window,serial=None, labjack=None, data_files=None):
     '''
-    Safer close function on premature experiment quit designed to gracefully close datafiles and devices. Assumes the existence of serial port, labjack, and data_file instances named 'ser', 'lj', and 'data_file' respectively. Also assumes existence of boolean variables: 'scanner' and 'biopac'.
+    Safer close function on premature experiment quit designed to gracefully close datafiles and devices. Minimum requires a window to close, but can also close: a serial object (typically one created to collect fMRI triggers), a labjack object (typically one created to trigger biopac/psychophys trigger), and a list of data_files (typically opened with Python's 'open').
 
-    This function is designed to be used as global key function for example:
+    *Note*: Sometimes psychopy will issue a crash message when prematurely quitting. This is nothing to worry about.
+
+    This function is designed to be used as Psychopy global key function for example:
 
     from psychopy_tools.presentation import clean_up
 
     # Then later in your script after window creation:
-    event.globalKeys.add(key='q',func=clean_up, name='shutdown',func_args=(scanner,biopac))
+    # Close window only
+    event.globalKeys.add(key='q',func=clean_up, name='shutdown',func_args=(window))
 
     Or embedded within a while loop:
 
     while True:
         # do something
         if len(event.getKeys(['q'])):
-            clean_up(scanner,biopac)
+            # Close window, devices and data files
+            clean_up(window,scanner,biopac,data_files)
+
+    Args:
+        window: window handle from psychopy script
+        serial: scanner trigger serial object instance
+        labjack: labjack (psychophys) object instance
+        data_files: list of data files
 
     '''
     print("CLOSING WINDOW...")
     window.close()
     print("CLOSING DATAFILES...")
-    data_file.close()
-    if scanner:
-        ser.close()
-    if biopac:
-        lj.close()
+    if data_files:
+        if not isinstance(data_files,list):
+            data_files = [data_files]
+        for f in data_files:
+            f.close()
+    if serial:
+        serial.close()
+    if labjack:
+        labjack.close()
     print("QUITTING...")
     core.quit()
 
@@ -43,6 +58,9 @@ def draw_scale_only(self):
     from types import MethodType
     my_scale = visual.RatingScale(...)
     my_scale.draw_only = MethodType(draw_scale_only,my_scale)
+
+    # Use just like you would have used .draw()
+    my_scale.draw_only()
 
     """
     self.win.setUnits(u'norm',log=False)
@@ -65,9 +83,9 @@ def draw_scale_only(self):
     self.marker.draw()
     self.win.setUnits(self.savedWinUnits,log=False)
 
-def wait_time(self,duration):
+def wait_time(self,duration,func=None,*func_args):
     """
-    Convenience method to augment clocks with non-slip timing.
+    Convenience method to augment clocks with non-slip timing. Can just wait a specific duration and do nothing, or run some function (e.g. get a rating)
 
     Use this by augmenting an already existing clock instance:
 
@@ -75,8 +93,18 @@ def wait_time(self,duration):
     timer = core.Clock()
     timer.wait_time = MethodType(wait_time,timer)
 
+    # use just like you would use any other timer method
+    timer.wait_time(5) # just wait 5 seconds
+
+    Args:
+        duration (int/float): time to wait in seconds
+        func (function handle): function to execute for the duration
+
     """
     self.reset()
     self.add(duration)
     while self.getTime() < 0:
-        pass
+        if func:
+            func(*func_args)
+        else:
+            pass
