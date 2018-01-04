@@ -31,7 +31,7 @@ You can just import this as if you would any other Psychopy functionality:
 See the function helps or the documentation for more info.
 
 ----------
-###Credits  
+### Credits  
 
 
 This package was created with [Cookiecutter](http://cookiecutter.readthedocs.io/en/latest/readme.html) and the [`ejolly/cookiecutter-pypackage`](https://github.com/ejolly/cookiecutter-pypackage) template.
