@@ -28,8 +28,14 @@ Installation
    :maxdepth: 0
    :hidden:
 
-   usage    
+   usage
    api
+
+:doc:`Usage <usage>`
+-------------------
+
+:doc:`Function Help <api>`
+-------------------------
 
 --------------
 

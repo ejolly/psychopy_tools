@@ -12,23 +12,9 @@ This package contains some tools to make working with [Psychopy](http://www.psyc
 
 (*coming to pypi soon!*)
 
-## Usage  
+## [Documentation](http://psychopy-tools.readthedocs.io/en/latest/index.html)
 
-### Add to Psychopy's path
-If using the standalone Psychopy application you'll need to add this to Psychopy's path:
-- Find out where `pip` installed the package (search for your `site-packages`) directory, it'll be inside
-    - If you're using `conda` this should be somewhere like: `/Users/You/anaconda/lib/python2.7/site-packages/psychopy_tools-0.1.0-py2.7.egg`
-    - Note the version number maybe different!
-- Copy this path
-- In Psychopy goto: File > Preferences > General
-- Paste the path into the "paths" field, e.g `['/Users/You/anaconda/lib/python2.7/site-packages/psychopy_tools-0.1.0-py2.7.egg']`
-- Click OK to apply
-
-### Within your experiment script
-You can just import this as if you would any other Psychopy functionality:  
-`from psychopy.presentation import clean_up`
-
-See the function helps or the documentation for more info.
+The documentation contains basic usage example, how to get setup, and complete information about all current tools.
 
 ----------
 ### Credits  
