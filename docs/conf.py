@@ -31,8 +31,6 @@ project_root = os.path.dirname(cwd)
 # version is used.
 sys.path.insert(0, project_root)
 
-import psychopy_tools
-
 # -- General configuration ---------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
@@ -45,6 +43,14 @@ extensions = ['sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
     'sphinx.ext.githubpages',
     'sphinx.ext.napoleon']
+
+# Mock imports
+import mock
+MOCK_MODULES = ['psychopy']
+for mod_name in MOCK_MODULES:
+    sys.modules[mod_name] = mock.Mock()
+
+autodoc_member_order = 'bysource'
 
 # Sphinx Napolean settings
 napoleon_use_ivar = True
@@ -70,6 +76,7 @@ copyright = u"2018, Eshin Jolly"
 # for |version| and |release|, also used in various other places throughout
 # the built documents.
 #
+import psychopy_tools
 # The short X.Y version.
 version = psychopy_tools.__version__
 # The full version, including alpha/beta/rc tags.
@@ -98,7 +105,7 @@ exclude_patterns = ['_build','Thumbs.db', '.DS_Store']
 
 # If true, the current module name will be prepended to all description
 # unit titles (such as .. function::).
-#add_module_names = True
+# add_module_names = True
 
 # If true, sectionauthor and moduleauthor directives will be shown in the
 # output. They are ignored by default.

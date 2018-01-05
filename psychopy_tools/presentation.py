@@ -11,27 +11,31 @@ def clean_up(window,serial=None, labjack=None, data_files=None):
 
     *Note*: Sometimes psychopy will issue a crash message when prematurely quitting. This is nothing to worry about.
 
-    This function is designed to be used as Psychopy global key function for example:
-
-    from psychopy_tools.presentation import clean_up
-
-    # Then later in your script after window creation:
-    # Close window only
-    event.globalKeys.add(key='q',func=clean_up, name='shutdown',func_args=(window))
-
-    Or embedded within a while loop:
-
-    while True:
-        # do something
-        if len(event.getKeys(['q'])):
-            # Close window, devices and data files
-            clean_up(window,scanner,biopac,data_files)
-
     Args:
         window: window handle from psychopy script
         serial: scanner trigger serial object instance
         labjack: labjack (psychophys) object instance
         data_files: list of data files
+
+    Examples:
+        This function is designed to be used as Psychopy global key function for example:
+
+        >>> from psychopy_tools.presentation import clean_up
+
+        Then later in your script after window creation:
+
+        >>> # Close window only
+        >>> event.globalKeys.add(key='q',func=clean_up, name='shutdown',func_args=(window))
+
+        Or embedded within a while loop:
+
+        >>> while True:
+        >>>    # do something
+        >>>
+        >>>    # But be able to quit while in the loop
+        >>>    if len(event.getKeys(['q'])):
+        >>>        # Close window, devices and data files
+        >>>        clean_up(window,scanner,biopac,data_files)
 
     '''
     print("CLOSING WINDOW...")
@@ -51,16 +55,23 @@ def clean_up(window,serial=None, labjack=None, data_files=None):
 
 def draw_scale_only(self):
     """
-    Auxilliary dynamic method to only draw a rating scale, but not collect a rating.
+    Convenience method to only draw a visual.RatingScale scale, but not collect a rating.
 
-    Use this by augmenting an already existing visual scale instance:
+    Examples:
 
-    from types import MethodType
-    my_scale = visual.RatingScale(...)
-    my_scale.draw_only = MethodType(draw_scale_only,my_scale)
+        Use this by augmenting an already existing visual scale instance:
 
-    # Use just like you would have used .draw()
-    my_scale.draw_only()
+        >>> # First we need a Python function to make this "method-able"
+        >>> from types import MethodType
+        >>>
+        >>> # Then create your scale as you normally would
+        >>> my_scale = visual.RatingScale(...)
+        >>>
+        >>> # Then add this as a new method to the instance
+        >>> my_scale.draw_only = MethodType(draw_scale_only,my_scale)
+        >>>
+        >>> # Use it just like you would have used .draw()
+        >>> my_scale.draw_only()
 
     """
     self.win.setUnits(u'norm',log=False)
@@ -85,21 +96,31 @@ def draw_scale_only(self):
 
 def wait_time(self,duration,func=None,*func_args):
     """
-    Convenience method to augment clocks with non-slip timing. Can just wait a specific duration and do nothing, or run some function (e.g. get a rating)
-
-    Use this by augmenting an already existing clock instance:
-
-    from types import MethodType
-    timer = core.Clock()
-    timer.wait_time = MethodType(wait_time,timer)
-
-    # use just like you would use any other timer method
-    timer.wait_time(5) # just wait 5 seconds
+    Convenience method to augment core.Clock with non-slip timing. Can just wait a specific duration and do nothing, or run some function (e.g. get a rating)
 
     Args:
         duration (int/float): time to wait in seconds
         func (function handle): function to execute for the duration
 
+    Examples:
+
+        Use this by augmenting an already existing clock instance:
+
+        >>> # First we need a Python function to make this "method-able"
+        >>> from types import MethodType
+        >>>
+        >>> # Then create your clock as your normally would
+        >>> timer = core.Clock()
+        >>>
+        >>> # Then add this as a new method to the instance
+        >>> timer.wait_time = MethodType(wait_time,timer)
+        >>>
+        >>> # Use just like you would use any other timer method
+        >>> timer.wait_time(5) # just wait 5 seconds
+        >>>
+        >>> # You can also present something for a specific amount of time or run any arbitrary function
+        >>>
+        >>> time.wait_time(5,my_func,func_args) #run my_func(func_args) in a while loop for 5 seconds
     """
     self.reset()
     self.add(duration)

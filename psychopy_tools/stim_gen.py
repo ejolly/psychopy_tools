@@ -22,8 +22,8 @@ def random_jitter(desired_mean,num_trials,iti_min=1,iti_max=np.inf,discrete=True
     Args:
         desired_mean (float): desired mean ITI
         num_trials (int): number of trials (number of ITIs to create)
-        sMin (int/float): minimum ITI length; guaranteed; default 1
-        sMax (int/float): maximum ITI length; only guaranteed that ITIs will not be longer than this; default None
+        iti_min (int/float): minimum ITI length; guaranteed; default 1
+        iti_max (int/float): maximum ITI length; only guaranteed that ITIs will not be longer than this; default None
         discrete (bool): should ITIs be integers only (discrete geometric) or floats (continuous exponential);
             default discrete
         tolerance (float): acceptable difference from desired mean; default 0.05
@@ -31,7 +31,7 @@ def random_jitter(desired_mean,num_trials,iti_min=1,iti_max=np.inf,discrete=True
         plot (bool): plot the distribution for visual inspection; default True
 
     Returns:
-        seq (np.ndarry): sequence
+        seq (np.ndarray): sequence
 
     """
 
