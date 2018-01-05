@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Main module."""
+"""Functions typically used when running the presentation script."""
 
 from __future__ import division
 from psychopy import core

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Main module."""
+"""Functions associated with stimulus generation and randomization."""
 
 from __future__ import division
 import numpy as np
