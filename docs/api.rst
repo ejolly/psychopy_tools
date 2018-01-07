@@ -15,3 +15,9 @@ This reference provides detailed documentation for all the functions in Psychopy
 
 .. automodule:: psychopy_tools.stim_gen
     :members:
+
+:mod:`psychopy_tools.rating`: Visual Rating Scale
+-------------------------------------------------
+
+.. autoclass:: psychopy_tools.rating.RatingScale
+    :members:

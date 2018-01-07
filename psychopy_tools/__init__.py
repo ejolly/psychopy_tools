@@ -16,3 +16,4 @@ from .presentation import (clean_up,
                           draw_scale_only,
                           wait_time)
 from .stim_gen import (random_jitter)
+from .rating import RatingScale

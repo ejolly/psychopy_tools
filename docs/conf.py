@@ -46,7 +46,20 @@ extensions = ['sphinx.ext.autodoc',
 
 # Mock imports
 import mock
-MOCK_MODULES = ['psychopy']
+MOCK_MODULES =[
+    'psychopy',
+    'psychopy.colors',
+    'psychopy.constants',
+    'psychopy.visual',
+    'psychopy.visual.circle',
+    'psychopy.visual.shape',
+    'psychopy.visual.patch',
+    'psychopy.visual.text',
+    'psychopy.visual.basevisual',
+    'psychopy.visual.helpers',
+    'psychopy.tools',
+    'psychopy.tools.attributetools'
+    ]
 for mod_name in MOCK_MODULES:
     sys.modules[mod_name] = mock.Mock()
 
