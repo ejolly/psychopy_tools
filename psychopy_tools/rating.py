@@ -3,7 +3,6 @@
 """Modified fork of PsychoPy's original visual rating scale. This scale has the add 'bounds' parameter to limit choices above and below certain values during response collection."""
 
 from __future__ import division
-
 # Original code
 # Copyright (C) 2015 Jonathan Peirce
 # Distributed under the terms of the GNU General Public License (GPL).
@@ -1361,3 +1360,26 @@ class RatingScale(MinimalStim):
         choices are stored automatically in the history.
         """
         return self.history
+
+    def draw_only(self):
+        """Like .draw(), but **only** draws the scale to the screen without collecting a rating. Useful for presenting the scale as another stimulus type rather than a data input tool.
+        """
+        self.win.setUnits(u'norm',log=False)
+        proportion = self.markerPlacedAt/self.tickMarks
+        for visualElement in self.visualDisplayElements:
+            visualElement.draw()
+
+        if self.markerStyle == 'glow' and self.markerExpansion != 0:
+            if self.markerExpansion > 0:
+                newSize = 0.1 * self.markerExpansion * proportion
+                newOpacity = 0.2 + proportion
+            else:  # self.markerExpansion < 0:
+                newSize = - 0.1 * self.markerExpansion * (1 - proportion)
+                newOpacity = 1.2 - proportion
+                self.marker.setSize(self.markerBaseSize + newSize, log=False)
+                self.marker.setOpacity(min(1, max(0, newOpacity)), log=False)
+
+        x = self.offsetHoriz + self.hStretchTotal * (-0.5 + proportion)
+        self.marker.setPos((x, self.markerYpos), log=False)
+        self.marker.draw()
+        self.win.setUnits(self.savedWinUnits,log=False)

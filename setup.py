@@ -8,9 +8,6 @@ from setuptools import setup, find_packages
 with open('README.md') as readme_file:
     readme = readme_file.read()
 
-with open('HISTORY.rst') as history_file:
-    history = history_file.read()
-
 with open('requirements.txt') as f:
     requirements = f.read().splitlines()
 
@@ -18,7 +15,7 @@ setup(
     name='psychopy_tools',
     version='0.1.0',
     description="Reusable tools for working with Psychopy.",
-    long_description=readme + '\n\n' + history,
+    long_description=readme,
     author="Eshin Jolly",
     author_email='eshin.jolly.gr@dartmouth.edu',
     url='https://github.com/ejolly/psychopy_tools',

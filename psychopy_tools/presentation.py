@@ -3,6 +3,7 @@
 """Functions typically used when running the presentation script."""
 
 from __future__ import division
+
 from psychopy import core
 
 def clean_up(window,serial=None, labjack=None, data_files=None):
@@ -55,11 +56,13 @@ def clean_up(window,serial=None, labjack=None, data_files=None):
 
 def draw_scale_only(self):
     """
+    *DEPRECATED* Use `psychopy_tools.rating.RatingScale` which has this method built-in.
+
     Convenience method to only draw a visual.RatingScale scale, but not collect a rating.
 
     Examples:
 
-        Use this by augmenting an already existing visual scale instance:
+        Use this by augmenting an already existing Psychopy visual scale instance:
 
         >>> # First we need a Python function to make this "method-able"
         >>> from types import MethodType
@@ -104,7 +107,7 @@ def wait_time(self,duration,func=None,*func_args):
 
     Examples:
 
-        Use this by augmenting an already existing clock instance:
+        Use this by augmenting an already existing Psychopy clock instance:
 
         >>> # First we need a Python function to make this "method-able"
         >>> from types import MethodType

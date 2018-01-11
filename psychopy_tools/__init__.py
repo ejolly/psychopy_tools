@@ -15,5 +15,5 @@ __all__ = ["stim_gen",
 from .presentation import (clean_up,
                           draw_scale_only,
                           wait_time)
-from .stim_gen import (random_jitter)
+from .stim_gen import (random_jitter,random_uniform_jitter)
 from .rating import RatingScale
