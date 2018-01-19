@@ -97,7 +97,7 @@ def draw_scale_only(self):
     self.marker.draw()
     self.win.setUnits(self.savedWinUnits,log=False)
 
-def wait_time(self,duration,func=None,*func_args):
+def wait_time(self,duration,func=None,func_args=None):
     """
     Convenience method to augment core.Clock with non-slip timing. Can just wait a specific duration and do nothing, or run some function (e.g. get a rating)
 
