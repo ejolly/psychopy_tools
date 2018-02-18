@@ -1,3 +1,5 @@
 pandas>=0.19.1
 numpy>=1.13.0
 matplotlib>=2.1.0
+psychopy
+future

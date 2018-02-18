@@ -62,19 +62,19 @@ def draw_scale_only(self):
 
     Examples:
 
-        Use this by augmenting an already existing Psychopy visual scale instance:
+        Use this by augmenting an already existing Psychopy visual.RatingScale instance:
 
         >>> # First we need a Python function to make this "method-able"
         >>> from types import MethodType
         >>>
         >>> # Then create your scale as you normally would
-        >>> my_scale = visual.RatingScale(...)
+        >>> myScale = visual.RatingScale(...)
         >>>
         >>> # Then add this as a new method to the instance
-        >>> my_scale.draw_only = MethodType(draw_scale_only,my_scale)
+        >>> myScale.draw_only = MethodType(draw_scale_only,myScale)
         >>>
         >>> # Use it just like you would have used .draw()
-        >>> my_scale.draw_only()
+        >>> myScale.draw_only()
 
     """
     self.win.setUnits(u'norm',log=False)
@@ -97,6 +97,36 @@ def draw_scale_only(self):
     self.marker.draw()
     self.win.setUnits(self.savedWinUnits,log=False)
 
+def wait_for_click(self):
+    """
+    Similar to event.waitKeys(), but waits for a mouse click. Specifically waits for the press **and** release of a mouse click. Agnostic to which mouse button was clicked.
+
+    Examples:
+
+        Use this by augmenting an already existing Psychopy event.Mouse instance:
+
+        >>> # First we need a Python function to make this "method-able"
+        >>> from types import MethodType
+        >>>
+        >>> # Then create your scale as you normally would
+        >>> myMouse = event.Mouse(...)
+        >>>
+        >>> # Then add this as a new method to the instance
+        >>> myMouse.wait_for_click = MethodType(wait_for_click,myMouse)
+        >>>
+        >>> # Use it just like you would have used any other method
+        >>> myMouse.wait_for_click()
+    """
+    notClicked = True
+    while notClicked:
+        buttons = self.getPressed()
+        if any(buttons):
+            while any(self.getPressed()):
+                pass
+            notClicked=False
+    return
+
+
 def wait_time(self,duration,func=None,func_args=None):
     """
     Convenience method to augment core.Clock with non-slip timing. Can just wait a specific duration and do nothing, or run some function (e.g. get a rating)
@@ -107,7 +137,7 @@ def wait_time(self,duration,func=None,func_args=None):
 
     Examples:
 
-        Use this by augmenting an already existing Psychopy clock instance:
+        Use this by augmenting an already existing Psychopy core.Clock instance:
 
         >>> # First we need a Python function to make this "method-able"
         >>> from types import MethodType
