@@ -1,5 +1,6 @@
-pandas>=0.19.1
+pandas>=0.22.0
 numpy>=1.13.0
-matplotlib>=2.1.0
-psychopy
+matplotlib>=1.4.3
+psychopy==1.80.6
+pyglet
 future
